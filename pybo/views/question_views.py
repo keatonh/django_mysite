@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, resolve_url
 from django.utils import timezone
 
 from pybo.forms import QuestionForm
@@ -42,6 +42,7 @@ def question_modify(request, question_id):
             question.modify_date = timezone.now()  # 수정일시 저장
             question.save()
             return redirect('pybo:detail', question_id=question.id)
+
     else:
         form = QuestionForm(instance=question)
     context = {'form': form}
